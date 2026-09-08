@@ -1,19 +1,21 @@
-<docs-decorative-header title="Components" imgSrc="adev/src/assets/images/components.svg"> <!-- markdownlint-disable-line -->
-The fundamental building block for creating applications in Angular.
+> 🌐 本文档由 [angular/angular](https://github.com/angular/angular) 翻译,英文原版见原项目。
+
+<docs-decorative-header title="组件" imgSrc="adev/src/assets/images/components.svg"> <!-- markdownlint-disable-line -->
+在 Angular 中创建应用的基础构件。
 </docs-decorative-header>
 
-Components are the main building blocks of Angular applications. Each component represents a part of a larger web page. Organizing an application into components helps provide structure to your project, clearly separating code into specific parts that are easy to maintain and grow over time.
+组件是 Angular 应用的主要构建单元。每个组件代表较大网页中的一个部分。把应用组织成组件,有助于为项目提供结构,把代码清晰地划分为易于维护、可持续演进的具体模块。
 
-## Defining a component
+## 定义组件
 
-Every component has a few main parts:
+每个组件都由几个主要部分组成:
 
-1. A `@Component` [decorator](https://www.typescriptlang.org/docs/handbook/decorators.html) that contains some configuration used by Angular.
-2. An HTML template that controls what renders into the DOM.
-3. A [CSS selector](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors) that defines how the component is used in HTML.
-4. A TypeScript class with behaviors, such as handling user input or making requests to a server.
+1. 一个 `@Component` [装饰器](https://www.typescriptlang.org/docs/handbook/decorators.html),包含 Angular 使用的一些配置。
+2. 一个 HTML 模板,控制渲染到 DOM 中的内容。
+3. 一个 [CSS 选择器](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors),定义该组件在 HTML 中的使用方式。
+4. 一个承载行为的 TypeScript 类,比如处理用户输入或向服务器发起请求。
 
-Here is a simplified example of a `UserProfile` component.
+下面是一个简化的 `UserProfile` 组件示例。
 
 ```angular-ts
 // user-profile.ts
@@ -29,7 +31,7 @@ export class UserProfile {
 }
 ```
 
-The `@Component` decorator also optionally accepts a `styles` property for any CSS you want to apply to your template:
+`@Component` 装饰器还可以可选地接受一个 `styles` 属性,用于为模板应用你想要的 CSS:
 
 ```angular-ts
 // user-profile.ts
@@ -50,9 +52,9 @@ export class UserProfile {
 }
 ```
 
-### Separating HTML and CSS into separate files
+### 将 HTML 和 CSS 拆分到独立文件
 
-You can define a component's HTML and CSS in separate files using `templateUrl` and `styleUrl`:
+你可以使用 `templateUrl` 和 `styleUrl`,把组件的 HTML 和 CSS 定义在单独的文件里:
 
 ```angular-ts
 // user-profile.ts
@@ -79,9 +81,9 @@ h1 {
 }
 ```
 
-## Using components
+## 使用组件
 
-You build an application by composing multiple components together. For example, if you are building a user profile page, you might break the page up into several components like this:
+你通过把多个组件组合在一起来构建应用。例如,如果要构建一个用户资料页,可以这样把页面拆分为多个组件:
 
 ```mermaid
 flowchart TD
@@ -92,15 +94,15 @@ flowchart TD
     D[UserAddress]
 ```
 
-Here, the `UserProfile` component uses several other components to produce the final page.
+这里,`UserProfile` 组件使用若干其他组件,共同生成最终页面。
 
-To import and use a component, you need to:
+要导入并使用一个组件,你需要:
 
-1. In your component's TypeScript file, add an `import` statement for the component you want to use.
-2. In your `@Component` decorator, add an entry to the `imports` array for the component you want to use.
-3. In your component's template, add an element that matches the selector of the component you want to use.
+1. 在组件的 TypeScript 文件中,为目标组件添加一条 `import` 语句。
+2. 在你的 `@Component` 装饰器中,把目标组件加入 `imports` 数组。
+3. 在组件的模板中,添加一个与目标组件选择器匹配的元素。
 
-Here's an example of a `UserProfile` component importing a `ProfilePhoto` component:
+下面是 `UserProfile` 组件导入 `ProfilePhoto` 组件的示例:
 
 ```angular-ts
 // user-profile.ts
@@ -120,13 +122,13 @@ export class UserProfile {
 }
 ```
 
-TIP: Want to know more about Angular components? See the [In-depth Components guide](guide/components) for the full details.
+TIP: 想进一步了解 Angular 组件?参阅[组件深度指南](guide/components)获取完整细节。
 
-## Next Step
+## 下一步
 
-Now that you know how components work in Angular, it's time to learn how we add and manage dynamic data in our application.
+你已经了解 Angular 中组件的工作方式,接下来学习如何在应用中添加和管理动态数据。
 
 <docs-pill-row>
-  <docs-pill title="Reactivity with signals" href="essentials/signals" />
-  <docs-pill title="In-depth components guide" href="guide/components" />
+  <docs-pill title="使用 signals 实现响应式" href="essentials/signals" />
+  <docs-pill title="组件深度指南" href="guide/components" />
 </docs-pill-row>

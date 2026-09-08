@@ -1,33 +1,35 @@
-<docs-decorative-header title="Next Steps" imgSrc="adev/src/assets/images/roadmap.svg"> <!-- markdownlint-disable-line -->
+> 🌐 本文档由 [angular/angular](https://github.com/angular/angular) 翻译,英文原版见原项目。
+
+<docs-decorative-header title="下一步" imgSrc="adev/src/assets/images/roadmap.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-Now that you have been introduced to the main concepts of Angular - you're ready to put what you learned into practice with our interactive tutorials and learn more with our in-depth guides.
+你已经了解了 Angular 的核心概念——接下来可以通过我们的交互式教程把所学付诸实践,并通过深度指南继续深入学习。
 
 ## Playground
 
-Try out Angular in an interactive code editor to further explore the concepts you've learned.
+在交互式代码编辑器中试用 Angular,进一步探索你学到的概念。
 
 <docs-pill-row>
-  <docs-pill title="Play with Angular!" href="playground" />
+  <docs-pill title="来玩 Angular!" href="playground" />
 </docs-pill-row>
 
-## Tutorials
+## 教程
 
-Put these main concepts into practice with our in-browser tutorial or build your first app locally with the Angular CLI.
+通过浏览器内教程实践这些核心概念,或使用 Angular CLI 在本地构建你的第一个应用。
 
 <docs-pill-row>
-  <docs-pill title="Learn Angular's fundamentals" href="tutorials/learn-angular" />
-  <docs-pill title="Build your first Angular app" href="tutorials/first-app" />
+  <docs-pill title="学习 Angular 基础" href="tutorials/learn-angular" />
+  <docs-pill title="构建你的第一个 Angular 应用" href="tutorials/first-app" />
 </docs-pill-row>
 
-## In-depth Guides
+## 深度指南
 
-Here are some in-depth guides you might be interested in reading:
+以下是一些你可能会感兴趣的深度指南:
 
 <docs-pill-row>
-  <docs-pill title="Components In-depth Guide" href="guide/components" />
-  <docs-pill title="Template In-depth Guide" href="guide/templates" />
-  <docs-pill title="Forms In-depth Guide" href="/guide/forms" />
+  <docs-pill title="组件深度指南" href="guide/components" />
+  <docs-pill title="模板深度指南" href="guide/templates" />
+  <docs-pill title="表单深度指南" href="/guide/forms" />
 </docs-pill-row>
 
-To see the rest of our in-depth guides, check out the main navigation.
+要查看其余深度指南,请浏览主导航。
