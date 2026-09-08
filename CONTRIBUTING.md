@@ -1,246 +1,246 @@
-# Contributing to Angular
+> 🌐 本文档由 [angular/angular](https://github.com/angular/angular) 翻译,英文原版见原项目。
 
-We would love for you to contribute to Angular and help make it even better than it is today!
-As a contributor, here are the guidelines we would like you to follow:
+# 参与 Angular 贡献
 
-- [Code of Conduct](#coc)
-- [Question or Problem?](#question)
-- [Issues and Bugs](#issue)
-- [Feature Requests](#feature)
-- [Submission Guidelines](#submit)
-- [Coding Rules](#rules)
-- [Commit Message Guidelines](#commit)
-- [Signing the CLA](#cla)
+我们真诚欢迎你为 Angular 做贡献,帮助它变得比今天更好!
+作为贡献者,请遵循以下指南:
 
-## <a name="coc"></a> Code of Conduct
+- [行为准则](#coc)
+- [有问题或疑问?](#question)
+- [Issue 与 Bug](#issue)
+- [功能请求](#feature)
+- [提交规范](#submit)
+- [编码规则](#rules)
+- [提交信息规范](#commit)
+- [签署 CLA](#cla)
 
-Help us keep Angular open and inclusive.
-Please read and follow our [Code of Conduct][coc].
+## <a name="coc"></a> 行为准则
 
-## <a name="question"></a> Got a Question or Problem?
+请帮助我们一起保持 Angular 开放与包容。
+请阅读并遵守我们的[行为准则][coc]。
 
-Do not open issues for general support questions as we want to keep GitHub issues for bug reports and feature requests.
-Instead, we recommend using [Stack Overflow](https://stackoverflow.com/questions/tagged/angular) to ask support-related questions. When creating a new question on Stack Overflow, make sure to add the `angular` tag.
+## <a name="question"></a> 有问题或疑问?
 
-Stack Overflow is a much better place to ask questions since:
+请不要为一般性支持类问题开设 issue,我们希望把 GitHub issue 留给 bug 报告和功能请求。
+我们建议你前往 [Stack Overflow](https://stackoverflow.com/questions/tagged/angular) 提出支持类问题。在 Stack Overflow 上创建新问题时,请务必添加 `angular` 标签。
 
-- there are thousands of people willing to help on Stack Overflow
-- questions and answers stay available for public viewing so your question/answer might help someone else
-- Stack Overflow's voting system assures that the best answers are prominently visible.
+Stack Overflow 是更合适的提问场所,原因如下:
 
-To save your and our time, we will systematically close all issues that are requests for general support and redirect people to Stack Overflow.
+- Stack Overflow 上有数以千计乐于帮忙的人
+- 问答内容会长期公开保留,你的提问或回答可能帮到其他人
+- Stack Overflow 的投票机制能保证最佳答案获得显著曝光
 
-If you would like to chat about the question in real-time, you can reach out via [the Angular community Discord server][discord].
+为了节省你和我们双方的时间,我们会系统性关闭所有一般性支持类 issue,并引导大家转向 Stack Overflow。
 
-## <a name="issue"></a> Found a Bug?
+如果你想就问题进行实时交流,可以通过 [Angular 社区 Discord 服务器][discord] 联系我们。
 
-If you find a bug in the source code, you can help us by [submitting an issue](#submit-issue) to our [GitHub Repository][github].
-Even better, you can [submit a Pull Request](#submit-pr) with a fix.
+## <a name="issue"></a> 发现了 Bug?
 
-## <a name="feature"></a> Missing a Feature?
+如果你在源码中发现 bug,可以向我们[提交 issue](#submit-issue) 至 [GitHub 仓库][github]。
+更好的做法是,[提交一个 Pull Request](#submit-pr) 连同修复一起交付。
 
-You can _request_ a new feature by [submitting an issue](#submit-issue) to our GitHub Repository.
-If you would like to _implement_ a new feature, please consider the size of the change in order to determine the right steps to proceed:
+## <a name="feature"></a> 缺少某个功能?
 
-- For a **Major Feature**, first open an issue and outline your proposal so that it can be discussed.
-  This process allows us to better coordinate our efforts, prevent duplication of work, and help you to craft the change so that it is successfully accepted into the project.
+你可以通过向我们的 GitHub 仓库[提交 issue](#submit-issue) 来_请求_新功能。
+如果你想_实现_某个新功能,请先评估改动规模,以决定采取哪种流程:
 
-  **Note**: Adding a new topic to the documentation, or significantly re-writing a topic, counts as a major feature.
+- 对于**重大功能(Major Feature)**,请先开一个 issue 阐述你的提案,供大家讨论。
+  这个流程能让我们更好地协调精力、避免重复劳动,并帮助你打磨改动方案,使其更顺利地被项目接受。
 
-- **Small Features** can be crafted and directly [submitted as a Pull Request](#submit-pr).
+  **注意**:为文档新增一个主题,或对某个主题进行大规模重写,同样算作重大功能。
 
-## <a name="submit"></a> Submission Guidelines
+- **小功能(Small Features)**可以直接实现并[以 Pull Request 形式提交](#submit-pr)。
 
-### <a name="submit-issue"></a> Submitting an Issue
+## <a name="submit"></a> 提交规范
 
-Before you submit an issue, please search the issue tracker. An issue for your problem might already exist and the discussion might inform you of workarounds readily available.
+### <a name="submit-issue"></a> 提交 Issue
 
-We want to fix all the issues as soon as possible, but before fixing a bug, we need to reproduce and confirm it.
-In order to reproduce bugs, we require that you provide a minimal reproduction.
-Having a minimal reproducible scenario gives us a wealth of important information without going back and forth to you with additional questions.
+提交 issue 之前,请先搜索 issue 跟踪列表。你遇到的问题可能已经有人提过,相关讨论或许能直接提供现成的解决办法。
 
-A minimal reproduction allows us to quickly confirm a bug (or point out a coding problem) as well as confirm that we are fixing the right problem.
+我们希望尽快修复所有问题,但在修复 bug 之前,我们必须先复现并确认它。
+为了复现 bug,我们要求你提供一个最小化复现(minimal reproduction)。
+一份最小可复现场景能一次性提供大量关键信息,免去我们反复追问的来回成本。
 
-We require a minimal reproduction to save maintainers' time and ultimately be able to fix more bugs.
-Often, developers find coding problems themselves while preparing a minimal reproduction.
-We understand that sometimes it might be hard to extract essential bits of code from a larger codebase, but we really need to isolate the problem before we can fix it.
+最小化复现让我们能够快速确认 bug(或指出代码问题),同时确认我们修的确实是正确的问题。
 
-Unfortunately, we are not able to investigate / fix bugs without a minimal reproduction, so if we don't hear back from you, we are going to close an issue that doesn't have enough info to be reproduced.
+要求最小化复现是为了节省维护者的时间,最终让更多 bug 得到修复。
+很多开发者在准备最小化复现的过程中,自己就发现了问题所在。
+我们理解,有时候很难从一个庞大的代码库中剥离出关键代码,但我们必须先隔离问题,才能修复它。
 
-You can file new issues by selecting from our [new issue templates](https://github.com/angular/angular/issues/new/choose) and filling out the issue template.
+遗憾的是,没有最小化复现我们无法调查/修复 bug。如果我们没有收到你的回复,信息不足以复现的 issue 将被关闭。
 
-### <a name="pr-quality"></a> Contribution Quality
+你可以从我们的[新 issue 模板](https://github.com/angular/angular/issues/new/choose)中选择合适的模板并填写内容,来创建新 issue。
 
-We strongly value open source contribution and pull requests from community contributors. Please note that every pull request is reviewed and merged by an actual person on the team, which does take time and effort. That is time and effort that does take away from other valuable work. With that in mind we have a minimum set of expectations that are required of any community contribution pull request that is opened.
+### <a name="pr-quality"></a> 贡献质量
 
-1. Search [GitHub](https://github.com/angular/angular/pulls) for an open or closed PR that relates to your submission.
-   - You don't want to duplicate existing efforts.
-2. Be sure that an issue or pull request clearly describes the problem you're fixing, or documents the design for the feature you'd like to add. Issues require a _minimal_ reproduction.
+我们高度重视开源贡献以及来自社区的 Pull Request。请注意,每一个 Pull Request 都由团队中真实的人进行评审和合并,这需要花费时间和精力,而这些时间精力本可以投入其他有价值的工作。因此,我们对社区贡献的 Pull Request 设有如下最低要求:
 
-3. Discussing the design in an issue upfront helps to ensure that we're ready to accept your work. Pull requests are not the right place to do design work.
-   - When in doubt, open an issue first before doing any sort of speculative implementation work
+1. 在 [GitHub](https://github.com/angular/angular/pulls) 上搜索与你的提交相关的开放或已关闭 PR。
+   - 避免与已有工作重复。
+2. 确保某个 issue 或 pull request 清楚描述了你要修复的问题,或者记录了你想要添加的功能设计。issue 必须附带_最小化_复现。
 
-4. Ideally the PR should be tied to an issue, but this is not required
+3. 提前在 issue 中讨论设计,有助于确保我们已准备好接受你的工作。Pull Request 不是做设计论证的合适场合。
+   - 拿不准时,先开 issue 讨论,再做任何投机性的实现工作。
 
-5. The change should improve code quality (i.e. addressing a TODO) or should impact / improve a feature
+4. 理想情况下 PR 应关联一个 issue,但这不是硬性要求。
 
-6. Micro optimizations will only be accepted if they are validated by an actual benchmark
+5. 改动应当能提升代码质量(例如处理某个 TODO),或对某个功能产生影响/改进。
 
-7. Do not open pull requests that are addressing feature requests that are not labeled as "help wanted" as they usually need additional design work before we could accept pull requests
+6. 微优化只有在有真实基准测试(benchmark)验证的情况下才会被接受。
 
-8. The change should be well tested
+7. 不要针对未被标记为 "help wanted" 的功能请求开设 Pull Request,因为这类功能通常还需要额外的设计工作,我们暂时无法接受相关 PR。
 
-If your pull request does not meet these minimum expectations, we may close your PR. Also, if your PR introduces a breaking change, it's possible the level of churn this breaking change causes may block our ability to move forward with it. We may close your PR in that situation, as well. Otherwise, we're excited to see your contributions and enthusiasm for Angular!
+8. 改动应当有完善的测试覆盖。
 
-### <a name="submit-pr"></a> Submitting a Pull Request (PR)
+如果你的 Pull Request 不满足这些最低要求,我们可能会关闭你的 PR。另外,如果你的 PR 引入了破坏性变更(breaking change),该变更带来的动荡程度可能让我们无法继续推进,这种情况下我们也可能关闭你的 PR。除此之外,我们非常期待看到你对 Angular 的贡献与热情!
 
-Before you submit your Pull Request (PR) consider the following guidelines:
+### <a name="submit-pr"></a> 提交 Pull Request(PR)
 
-1. Please sign our [Contributor License Agreement (CLA)](#cla) before sending PRs.
-   We cannot accept code without a signed CLA.
-   Make sure you author all contributed Git commits with email address associated with your CLA signature.
+提交 Pull Request(PR)之前,请先了解以下指南:
 
-2. [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the [angular/angular](https://github.com/angular/angular/fork) repo.
+1. 发送 PR 之前,请先签署我们的[贡献者许可协议(CLA)](#cla)。
+   没有签署 CLA,我们无法接受任何代码。
+   请确保所有贡献的 Git 提交都使用与你 CLA 签名关联的邮箱地址撰写。
 
-3. In your forked repository, make your changes in a new git branch:
+2. [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) [angular/angular](https://github.com/angular/angular/fork) 仓库。
+
+3. 在你 fork 的仓库中,于新的 git 分支上进行改动:
 
    ```shell
    git checkout -b my-fix-branch main
    ```
 
-4. Create your patch, **including appropriate test cases**.
+4. 制作你的补丁,**并附上相应的测试用例**。
 
-5. Follow our [Coding Rules](#rules).
+5. 遵守我们的[编码规则](#rules)。
 
-6. Run the full Angular test suite, as described in the [developer documentation][dev-doc], and ensure that all tests pass.
+6. 按照[开发者文档][dev-doc]中的说明运行完整的 Angular 测试套件,确保所有测试通过。
 
-7. Commit your changes using a descriptive commit message that follows our [commit message conventions][commit-message-guidelines].
-   Adherence to these conventions is necessary because release notes are automatically generated from these messages.
+7. 使用符合我们[提交信息规范][commit-message-guidelines]的描述性提交信息来提交改动。
+   遵守这些规范是必须的,因为发布说明是根据这些提交信息自动生成的。
 
    ```shell
    git commit --all
    ```
 
-   Note: the optional commit `--all` command line option will automatically "add" and "rm" edited files.
+   注意:可选的 `--all` 命令行参数会自动 "add" 和 "rm" 被修改的文件。
 
-8. Push your branch to GitHub:
+8. 把分支推送到 GitHub:
 
    ```shell
    git push origin my-fix-branch
    ```
 
-9. In GitHub, send a pull request to `angular:main`.
+9. 在 GitHub 上向 `angular:main` 发起 pull request。
 
-### Reviewing a Pull Request
+### Pull Request 评审
 
-The Angular team reserves the right not to accept pull requests from community members who haven't been good citizens of the community. Such behavior includes not following the [Angular code of conduct](https://github.com/angular/code-of-conduct) and applies within or outside of Angular managed channels.
+Angular 团队保留不接受社区贡献者 Pull Request 的权利,前提是该成员此前在社区中有不当行为,包括不遵守 [Angular 行为准则](https://github.com/angular/code-of-conduct),无论该行为发生在 Angular 官方渠道之内还是之外。
 
-#### Addressing review feedback
+#### 处理评审意见
 
-If we ask for changes via code reviews then:
+如果我们通过代码评审要求你修改,那么:
 
-1. Make the required updates to the code.
+1. 对代码进行所需的更新。
 
-2. Re-run the Angular test suites to ensure tests are still passing.
+2. 重新运行 Angular 测试套件,确保测试仍然通过。
 
-3. Create a fixup commit and push to your GitHub repository (this will update your Pull Request):
+3. 创建一个 fixup 提交并推送到你的 GitHub 仓库(这会自动更新你的 Pull Request):
 
    ```shell
    git commit --all --fixup HEAD
    git push
    ```
 
-   For more info on working with fixup commits see [here](./contributing-docs/using-fixup-commits.md).
+   关于 fixup 提交的更多信息参见[这里](./contributing-docs/using-fixup-commits.md)。
 
-That's it! Thank you for your contribution!
+完成!感谢你的贡献!
 
-##### Updating the commit message
+##### 更新提交信息
 
-A reviewer might often suggest changes to a commit message (for example, to add more context for a change or adhere to our [commit message guidelines][commit-message-guidelines]).
-In order to update the commit message of the last commit on your branch:
+评审者常常会建议修改提交信息(例如为改动补充上下文,或遵守我们的[提交信息规范][commit-message-guidelines])。
+要更新分支上最后一个提交的信息:
 
-1. Check out your branch:
+1. 检出你的分支:
 
    ```shell
    git checkout my-fix-branch
    ```
 
-2. Amend the last commit and modify the commit message:
+2. 修订(amend)最后一个提交并修改提交信息:
 
    ```shell
    git commit --amend
    ```
 
-3. Push to your GitHub repository:
+3. 推送到你的 GitHub 仓库:
 
    ```shell
    git push --force-with-lease
    ```
 
-> NOTE:<br />
-> If you need to update the commit message of an earlier commit, you can use `git rebase` in interactive mode.
-> See the [git docs](https://git-scm.com/docs/git-rebase#_interactive_mode) for more details.
+> 注意:<br />
+> 如果你需要更新更早提交的信息,可以以交互模式使用 `git rebase`。
+> 详情参见 [git 文档](https://git-scm.com/docs/git-rebase#_interactive_mode)。
 
-#### After your pull request is merged
+#### 你的 Pull Request 被合并之后
 
-After your pull request is merged, you can safely delete your branch and pull the changes from the main (upstream) repository:
+你的 pull request 被合并后,可以安全地删除你的分支,并从主(上游)仓库拉取变更:
 
-- Delete the remote branch on GitHub either through the GitHub web UI or your local shell as follows:
+- 通过 GitHub 网页界面或本地 shell 删除 GitHub 上的远端分支:
 
   ```shell
   git push origin --delete my-fix-branch
   ```
 
-- Check out the main branch:
+- 检出 main 分支:
 
   ```shell
   git checkout main -f
   ```
 
-- Delete the local branch:
+- 删除本地分支:
 
   ```shell
   git branch -D my-fix-branch
   ```
 
-- Update your local `main` with the latest upstream version:
+- 用最新的上游版本更新本地 `main` 分支:
 
   ```shell
   git pull --ff upstream main
   ```
 
-## <a name="rules"></a> Coding Rules
+## <a name="rules"></a> 编码规则
 
-To ensure consistency throughout the source code, keep these rules in mind as you are working:
+为了保证整个源码库的一致性,开发时请牢记以下规则:
 
-- All features or bug fixes **must be tested** by one or more specs (unit-tests).
-- All public API methods **must be documented**.
-- We follow [Google's TypeScript Style Guide][ts-style-guide], but wrap all code at **100 characters**.
+- 所有新功能或 bug 修复**必须由一个或多个 spec(单元测试)覆盖**。
+- 所有公开 API 方法**必须编写文档**。
+- 我们遵循 [Google 的 TypeScript 风格指南][ts-style-guide],但所有代码在 **100 字符**处换行。
 
-  An automated formatter is available, see [building-and-testing-angular.md](./contributing-docs/building-and-testing-angular.md#formatting-your-source-code).
+  项目提供了自动化格式化工具,参见 [building-and-testing-angular.md](./contributing-docs/building-and-testing-angular.md#formatting-your-source-code)。
 
-## <a name="commit"></a> Commit Message Guidelines
+## <a name="commit"></a> 提交信息规范
 
-We have very precise rules over how our Git commit messages must be formatted:
+我们对 Git 提交信息的格式有非常严格的规定:
 
 ```
 <type>(<scope>): <short summary>
 ```
 
-See [Commit Message Guidelines][commit-message-guidelines] for details.
+详情参见[提交信息规范][commit-message-guidelines]。
 
-## <a name="cla"></a> Signing the CLA
+## <a name="cla"></a> 签署 CLA
 
-Please sign our Contributor License Agreement (CLA) before sending pull requests. For any code
-changes to be accepted, the CLA must be signed. It's a quick process, we promise!
+发送 pull request 之前,请先签署我们的贡献者许可协议(CLA)。任何代码改动若要被接受,都必须签署 CLA。过程很快,我们保证!
 
-- For individuals, we have a [simple click-through form][individual-cla].
-- For corporations, we'll need you to
-  [print, sign and one of scan+email, fax or mail the form][corporate-cla].
+- 个人贡献者请使用[简单的点击确认表单][individual-cla]。
+- 企业贡献者需要[打印、签署表格,然后通过扫描+邮件、传真或邮寄方式提交][corporate-cla]。
 
-If you have more than one GitHub account, or multiple email addresses associated with a single GitHub account, you must sign the CLA using the primary email address of the GitHub account used to author Git commits and send pull requests.
+如果你拥有多个 GitHub 账号,或单个 GitHub 账号关联了多个邮箱地址,则必须使用用于撰写 Git 提交和发送 pull request 的那个 GitHub 账号的 主邮箱地址 来签署 CLA。
 
-The following documents can help you sort out issues with GitHub accounts and multiple email addresses:
+以下资料可以帮助你排查 GitHub 账号与多个邮箱地址相关的问题:
 
 - https://help.github.com/articles/setting-your-commit-email-address-in-git/
 - https://stackoverflow.com/questions/37245303/what-does-usera-committed-with-userb-13-days-ago-on-github-mean

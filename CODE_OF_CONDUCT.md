@@ -1,79 +1,53 @@
-# Contributor Covenant Code of Conduct
+> 🌐 本文档由 [angular/angular](https://github.com/angular/angular) 翻译,英文原版见原项目。
 
-## Our Pledge
+# 贡献者公约行为准则
 
-In the interest of fostering a safe and welcoming environment, we as
-the Angular team pledge to make participation in our project and
-our community a harassment-free experience for everyone, regardless of age, body
-size, disability, ethnicity, sex characteristics, gender identity, gender expression,
-level of experience, education, socio-economic status, nationality, personal
-appearance, race, religion, or sexual identity and orientation.
+## 我们的承诺
 
-## Our Standards
+为了营造一个安全、友好的环境,我们 Angular 团队承诺:无论年龄、体型、残障状况、族裔、性征、性别认同与表达、经验水平、教育程度、社会经济地位、国籍、个人外貌、种族、宗教信仰或性倾向与性取向如何,让每一位参与者在本项目和社区中的体验都不受骚扰。
 
-Examples of behavior that contributes to creating a positive environment
-include:
+## 我们的标准
 
-- Use welcoming and inclusive language
-- Respect each other
-- Provide and gracefully accept constructive criticism
-- Show empathy towards other community members
+有助于营造积极环境的行为示例包括:
 
-Examples of unacceptable behavior by participants include:
+- 使用友好、包容的语言
+- 相互尊重
+- 提供建设性批评,并优雅地接受批评
+- 对其他社区成员展现同理心
 
-- Trolling, insulting/derogatory comments, and personal or political attacks
-- Public or private harassment
-- Publishing others' private information, such as a physical or electronic
-  address, without explicit permission
-- The use of sexualized language or imagery
-- Unwelcome sexual attention or advances
-- Other conduct which could reasonably be considered inappropriate in a
-  professional setting
+参与者不可接受的行为示例包括:
 
-## Our Responsibilities
+- 挑衅、侮辱/贬损性言论,以及针对个人或政治立场的攻击
+- 公开或私下骚扰
+- 未经明确许可,发布他人的隐私信息,例如现实或电子住址
+- 使用性暗示意味的语言或图像
+- 不受欢迎的性关注或性挑逗
+- 其他在专业场景下可合理认定为不当的行为
 
-Angular team are responsible for clarifying the standards of acceptable
-behavior and are expected to take appropriate and fair corrective action in
-response to any instances of unacceptable behavior.
+## 我们的责任
 
-Angular team have the right and responsibility to remove, edit, or
-reject comments, commits, code, wiki edits, issues, and other contributions
-that are not aligned to this Code of Conduct, and to ban temporarily or
-permanently any contributor for other behaviors that they deem inappropriate,
-threatening, offensive, or harmful.
+Angular 团队负责澄清何为可接受的行为标准,并期望在发生任何不可接受行为时,采取适当、公正的纠正措施。
 
-## Scope
+Angular 团队有权且有责任删除、编辑或拒绝与本行为准则相悖的评论、提交、代码、wiki 编辑、issue 及其他贡献,并有权对存在不当、威胁性、冒犯性或有害行为的贡献者处以临时或永久封禁。
 
-This Code of Conduct applies to all Angular communication channels - online or in person,
-and it also applies when an individual is representing the project or its community in
-public spaces. Examples of representing a project or community include using an official
-project e-mail address, posting via an official social media account, or acting
-as an appointed representative at an online or offline event. Representation of
-a project may be further defined and clarified by project maintainers.
+## 适用范围
 
-## Enforcement
+本行为准则适用于所有 Angular 沟通渠道——线上或线下;当个人在公开场合代表本项目或其社区时,同样适用。代表项目或社区的示例包括:使用项目官方电子邮件地址、通过官方社交媒体账号发布内容,或在线上/线下活动中担任指定代表。项目维护者可进一步定义和澄清"代表项目"的含义。
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the Angular team at conduct@angular.io. All
-complaints will be reviewed and investigated and will result in a response that
-is deemed necessary and appropriate to the circumstances. The Angular team
-will maintain confidentiality with regard to the reporter of an incident.
-Enforcement may result in an indefinite ban from all official Angular communication
-channels, or other actions as deemed appropriate by the Angular team.
+## 执行
 
-Angular maintainers who do not follow or enforce the Code of Conduct in good
-faith may face temporary or permanent repercussions as determined by other
-members of the project's leadership.
+如遭遇辱骂、骚扰或其他不可接受的行为,可通过 conduct@angular.io 联系 Angular 团队举报。所有投诉都会得到审查与调查,并根据具体情况作出必要且适当的回应。Angular 团队会对事件举报人的身份保密。执行措施可能包括无限期禁止参与所有 Angular 官方沟通渠道,或由 Angular 团队酌情采取其他行动。
 
-### Appeal
+未善意遵守或执行本行为准则的 Angular 维护者,可能面临项目领导层决定的临时或永久性后果。
 
-If you are banned you may contest the decision. To do so email conduct@angular.io with the subject line "Repeal Ban for {{your name here}}" and body with the responses to the following:
+### 申诉
 
-- Why do you believe you did not violate the Code of Conduct?
-- Were other factors involved in this situation the leadership team may have been unaware of?
-- Why do you wish to be a part of the Angular community?
+如果你被封禁,可以对决定提出异议。方式是发送邮件至 conduct@angular.io,邮件主题为 "Repeal Ban for {{your name here}}"(将 {{your name here}} 替换为你的名字),并在正文中回答以下问题:
 
-## Attribution
+- 你为什么认为自己没有违反行为准则?
+- 这件事中是否还有领导层可能不知情的其他因素?
+- 你为什么希望成为 Angular 社区的一员?
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 1.4,
-available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+## 归属声明
+
+本行为准则改编自 [Contributor Covenant](https://www.contributor-covenant.org) 1.4 版,原文见 https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
