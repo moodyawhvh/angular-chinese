@@ -1,128 +1,134 @@
-# Disable NG CLI TTY mode
+# ============================================================
+# 中文注释(angular-chinese 翻译项目):
+# 本文件是 Angular 仓库的 Bazel 构建配置(.bazelrc)。
+# 以下所有命令行标志(flag)均保持原样,仅将注释翻译为中文;
+# 标志行的含义决定了构建行为,请勿随意修改。
+# ============================================================
+
+# 关闭 NG CLI 的 TTY(终端交互)模式
 build --action_env=NG_FORCE_TTY=false
 
-# Enable debugging tests with --config=debug
+# 通过 --config=debug 启用调试测试
 test:debug --test_arg=--node_options=--inspect-brk --test_output=streamed --test_strategy=exclusive --test_timeout=9999 --nocache_test_results --strategy=TestRunner=standalone
 
-# Do not attempt to de-flake locally.
-# On CI we might set this to `3` to run with deflaking.
+# 本地不做去抖(deflake)重试。
+# 在 CI 上可能将其设为 `3`,以启用去抖重试。
 test --flaky_test_attempts=1
 
-# Required by `rules_ts`.
+# `rules_ts` 所必需。
 common --@aspect_rules_ts//ts:skipLibCheck=always
 common --@aspect_rules_ts//ts:default_to_tsc_transpiler
 
-# Needed as otherwise `env` of TS actions would be ignored.
+# 若不设置此项,TS 动作的 `env` 会被忽略。
 common --incompatible_merge_fixed_and_default_shell_env
 
-# Frozen lockfile
+# 锁定锁文件(不允许更新)
 common --lockfile_mode=error
 
 ###############################
-# Filesystem interactions     #
+# 文件系统交互                 #
 ###############################
 
-# Create symlinks in the project:
-# - dist/bin for outputs
-# - dist/testlogs, dist/genfiles
-# - bazel-out
-# NB: bazel-out should be excluded from the editor configuration.
-# The checked-in /.vscode/settings.json does this for VSCode.
-# Other editors may require manual config to ignore this directory.
-# In the past, we say a problem where VSCode traversed a massive tree, opening file handles and
-# eventually a surprising failure with auto-discovery of the C++ toolchain in
-# MacOS High Sierra.
-# See https://github.com/bazelbuild/bazel/issues/4603
+# 在项目内创建符号链接:
+# - 输出位于 dist/bin
+# - 测试日志与生成文件位于 dist/testlogs、dist/genfiles
+# - 以及 bazel-out
+# 注意:编辑器配置应排除 bazel-out 目录。
+# 仓库中已提交的 /.vscode/settings.json 已为 VSCode 做好此配置。
+# 其他编辑器可能需要手动配置以忽略该目录。
+# 过去曾出现过 VSCode 遍历巨型目录树、不断打开文件句柄,
+# 最终在 MacOS High Sierra 上自动探测 C++ 工具链时意外失败的问题。
+# 参见 https://github.com/bazelbuild/bazel/issues/4603
 build --symlink_prefix=dist/
 
-# Turn off legacy external runfiles
+# 关闭旧式 external runfiles
 build --nolegacy_external_runfiles
 run --nolegacy_external_runfiles
 test --nolegacy_external_runfiles
 
-# Turn on --incompatible_strict_action_env which was on by default
-# in Bazel 0.21.0 but turned off again in 0.22.0. Follow
-# https://github.com/bazelbuild/bazel/issues/7026 for more details.
-# This flag is needed to so that the bazel cache is not invalidated
-# when running bazel via `pnpm bazel`.
-# See https://github.com/angular/angular/issues/27514.
+# 开启 --incompatible_strict_action_env。该选项在 Bazel 0.21.0 中曾默认开启,
+# 0.22.0 中又被关闭。详情关注
+# https://github.com/bazelbuild/bazel/issues/7026 。
+# 需要此标志,是为了保证通过 `pnpm bazel` 运行时
+# bazel 缓存不会失效。
+# 参见 https://github.com/angular/angular/issues/27514 。
 build --incompatible_strict_action_env
 run --incompatible_strict_action_env
 test --incompatible_strict_action_env
 
-# Do not build runfile trees by default. If an execution strategy relies on runfile
-# symlink teee, the tree is created on-demand. See: https://github.com/bazelbuild/bazel/issues/6627
-# and https://github.com/bazelbuild/bazel/commit/03246077f948f2790a83520e7dccc2625650e6df
+# 默认不构建 runfile 树。如果某个执行策略依赖 runfile 符号链接树,
+# 该树会按需创建。参见:https://github.com/bazelbuild/bazel/issues/6627
+# 以及 https://github.com/bazelbuild/bazel/commit/03246077f948f2790a83520e7dccc2625650e6df
 build --nobuild_runfile_links
 
 build --enable_runfiles
 
 ###############################
-# Release support             #
-# Turn on these settings with #
-#  --config=release           #
+# 发布支持                     #
+# 通过 --config=release 启用   #
+# 以下设置                     #
 ###############################
 
-# Releases should always be stamped with version control info
-# This command assumes node on the path and is a workaround for
+# 发布构建必须打上版本控制信息戳
+# 该命令假定 node 在 PATH 中,是对下面问题的规避方案:
 # https://github.com/bazelbuild/bazel/issues/4802
 build:release --workspace_status_command="pnpm --silent ng-dev release build-env-stamp --mode=release"
 build:release --stamp
 
-# Snapshots should also be stamped with version control information.
+# 快照构建同样要打上版本控制信息戳。
 build:snapshot-build --workspace_status_command="pnpm --silent ng-dev release build-env-stamp --mode=snapshot"
 build:snapshot-build --stamp
-# @angular/language-server package depends directly on other Angular framework packages.
-# This flag ensures that the language server uses the snapshot-built framework packages from the repository.
+# @angular/language-server 包直接依赖其他 Angular 框架包。
+# 此标志确保 language server 使用仓库内快照构建的框架包。
 build:snapshot-build --//:enable_language_server_snapshot_repo_deps
 
-# Angular DevTools for Firefox releases *cannot* be stamped and `--config snapshot-build-firefox` is a no-op.
-# This is because Mozilla requires add-on source code to be uploaded and then they manually reproduce the build.
-# If we stamp the build based on Git information such as the current commit, then reproducing the build would require
-# uploading the entire `.git` directory. We already must upload the entire monorepo, and uploading `.git` as well
-# exceeds the max source file size. To address this, we just *don't* stamp Firefox builds of Angular DevTools.
+# Angular DevTools 的 Firefox 版发布*不能*打戳,`--config snapshot-build-firefox` 是空操作。
+# 这是因为 Mozilla 要求上传插件源码,然后由其手动复现构建。
+# 如果我们基于当前提交等 Git 信息为构建打戳,那么要复现构建就得
+# 上传整个 `.git` 目录。我们本来就必须上传整个 monorepo,再上传 `.git`
+# 就会超出源文件大小上限。为解决此问题,我们干脆*不*为 Angular DevTools 的 Firefox 构建打戳。
 build:snapshot-build-firefox --nostamp
 
 ###############################
-# Output                      #
+# 输出                         #
 ###############################
 
-# A more useful default output mode for bazel query
-# Prints eg. "ng_module rule //foo:bar" rather than just "//foo:bar"
+# 为 bazel query 提供更有用的默认输出模式
+# 例如输出 "ng_module rule //foo:bar",而不仅仅是 "//foo:bar"
 query --output=label_kind
 
-# By default, failing tests don't print any output, it goes to the log file
+# 默认情况下,失败的测试不会打印任何输出,输出会进入日志文件
 test --test_output=errors
 
 ##################################
-# Remote Build Execution support #
-# Turn on these settings with    #
-#  --config=remote               #
+# 远程构建执行支持                #
+# 通过 --config=remote 启用      #
+# 以下设置                       #
 ##################################
 
-# The following --define=EXECUTOR=remote will be able to be removed
-# once https://github.com/bazelbuild/bazel/issues/7254 is fixed
+# 一旦 https://github.com/bazelbuild/bazel/issues/7254 被修复,
+# 下面的 --define=EXECUTOR=remote 就可以移除
 build:remote --define=EXECUTOR=remote
 
-# Set a higher timeout value, just in case.
+# 设置较高的超时值,以防万一。
 build:remote --remote_timeout=600
 
-# Bazel detects maximum number of jobs based on host resources.
-# Since we run remotely, we can increase this number significantly.
+# Bazel 会根据宿主机资源探测最大作业(job)数。
+# 既然我们是在远程执行,就可以大幅提高这个数字。
 common:remote --jobs=200
 
 build:remote --google_default_credentials
 
-# Force remote exeuctions to consider the entire run as linux
+# 强制远程执行将整个运行视为 linux 环境
 build:remote --cpu=k8
 build:remote --host_cpu=k8
 
-# Toolchain and platform related flags
+# 工具链与平台相关标志
 build:remote --extra_execution_platforms=@devinfra//bazel/remote-execution:platform_with_network
 build:remote --host_platform=@devinfra//bazel/remote-execution:platform_with_network
 build:remote --platforms=@devinfra//bazel/remote-execution:platform_with_network
 
-# Remote instance and caching
+# 远程实例与缓存
 build:remote --remote_instance_name=projects/internal-200822/instances/primary_instance
 build:remote --bes_instance_name=internal-200822
 build:remote --remote_cache=remotebuildexecution.googleapis.com
@@ -131,25 +137,24 @@ build:remote --remote_upload_local_results=false
 
 build:remote --remote_grpc_log=/tmp/rbe-grpc.log
 
-# See: https://docs.google.com/document/d/1NgDPsCIwprDdqC1zj0qQrh5KGK2hQTSTux1DAvi4rSc/edit?tab=t.0.
+# 参见:https://docs.google.com/document/d/1NgDPsCIwprDdqC1zj0qQrh5KGK2hQTSTux1DAvi4rSc/edit?tab=t.0.
 build:remote --experimental_remote_execution_keepalive
 
-# Use HTTP remote cache
+# 使用 HTTP 远程缓存
 build:remote-cache --remote_cache=https://storage.googleapis.com/angular-team-cache
 build:remote-cache --remote_accept_cached=true
 build:remote-cache --remote_upload_local_results=false
 build:remote-cache --google_default_credentials
 
-# Additional flags added when running a "trusted build" with additional access
+# 运行拥有额外访问权限的“受信构建(trusted build)”时附加的标志
 build:trusted-build --remote_upload_local_results=true
 
-# Ensure that tags like "no-remote-exec" get propagated to actions created by rules,
-# even if the rule implementation does not explicitly pass them to the execution requirements.
+# 确保像 "no-remote-exec" 这类标签能传播到由规则创建的动作上,
+# 即使规则实现没有把它们显式传入执行要求。
 # https://bazel.build/reference/command-line-reference#flag--experimental_allow_tags_propagation
 common --incompatible_allow_tags_propagation
 
-# Disable network access in the sandbox by default. To enable network access
-# for a particular target, use:
+# 默认在沙箱中禁用网络访问。若要为特定目标开启网络访问,使用:
 #
 # load("@devinfra//bazel/remote-execution:index.bzl", "ENABLE_NETWORK")
 # my_target(
@@ -160,17 +165,17 @@ common --incompatible_allow_tags_propagation
 build --nosandbox_default_allow_network
 
 ################
-# Flag Aliases #
+# 标志别名      #
 ################
 
-# --ng_perf will ask the Ivy compiler to produce performance results for each build.
+# --ng_perf 会让 Ivy 编译器为每次构建输出性能数据。
 build --flag_alias=ng_perf=//packages/compiler-cli:ng_perf
 
 ####################################################
-# User bazel configuration
-# NOTE: This needs to be the *last* entry in the config.
+# 用户 Bazel 配置
+# 注意:此处必须是配置中的*最后*一条。
 ####################################################
 
-# Load any settings which are specific to the current user. Needs to be *last* statement
-# in this config, as the user configuration should be able to overwrite flags from this file.
+# 加载当前用户专属的设置。必须是本配置中的*最后*一条语句,
+# 因为用户配置应当能够覆盖本文件中的标志。
 try-import %workspace%/.bazelrc.user
