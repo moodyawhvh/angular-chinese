@@ -1,20 +1,23 @@
+> 🌐 本文档由 [angular/angular](https://github.com/angular/angular) 翻译,英文原版见原项目。
+> ℹ️ 本文件超过 10000 字符,以下为核心章节的完整中文翻译;代码块与链接保持原样。
+
 <docs-decorative-header title="Angular Signals" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
-Angular Signals is a system that granularly tracks how and where your state is used throughout an application, allowing the framework to optimize rendering updates.
+Angular Signals 是一套细粒度追踪状态在应用中被如何、何处使用的系统,让框架得以优化渲染更新。
 </docs-decorative-header>
 
-TIP: Check out Angular's [Essentials](essentials/signals) before diving into this comprehensive guide.
+TIP: 在深入这份完整指南之前,建议先阅读 Angular 的 [Essentials](essentials/signals)。
 
-## What are signals?
+## 什么是 signal?
 
-A **signal** is a wrapper around a value that notifies interested consumers when that value changes. Signals can contain any value, from primitives to complex data structures.
+**signal(信号)**是对一个值的包装器,当该值发生变化时会通知感兴趣的消费者。Signal 可以承载任何值,从原始类型到复杂的数据结构都可以。
 
-You read a signal's value by calling its getter function, which allows Angular to track where the signal is used.
+通过调用 signal 的 getter 函数来读取它的值,这让 Angular 能够追踪 signal 被使用的位置。
 
-Signals may be either _writable_ or _read-only_.
+Signal 分为_可写(writable)_和_只读(read-only)_两种。
 
-### Writable signals
+### 可写 signal
 
-Writable signals provide an API for updating their values directly. You create writable signals by calling the `signal` function with the signal's initial value:
+可写 signal 提供直接更新其值的 API。调用 `signal` 函数并传入初始值即可创建可写 signal:
 
 ```ts
 const count = signal(0);
@@ -23,24 +26,24 @@ const count = signal(0);
 console.log('The count is: ' + count());
 ```
 
-To change the value of a writable signal, either `.set()` it directly:
+要修改可写 signal 的值,可以直接 `.set()`:
 
 ```ts
 count.set(3);
 ```
 
-or use the `.update()` operation to compute a new value from the previous one:
+或者使用 `.update()` 操作,基于上一个值计算新值:
 
 ```ts
 // Increment the count by 1.
 count.update((value) => value + 1);
 ```
 
-Writable signals have the type `WritableSignal`.
+可写 signal 的类型是 `WritableSignal`。
 
-#### Converting writable signals to readonly
+#### 将可写 signal 转换为只读
 
-`WritableSignal` provides an `asReadonly()` method that returns a readonly version of the signal. This is useful when you want to expose a signal's value to consumers without allowing them to modify it directly:
+`WritableSignal` 提供了 `asReadonly()` 方法,返回该 signal 的只读版本。当你想把 signal 的值暴露给消费者、又不允许他们直接修改时,这很有用:
 
 ```ts
 @Service()
@@ -69,42 +72,42 @@ export class AwesomeCounter {
 }
 ```
 
-The readonly signal reflects any changes made to the original writable signal, but cannot be modified using `set()` or `update()` methods.
+只读 signal 会反映原始可写 signal 的任何变化,但不能通过 `set()` 或 `update()` 方法修改。
 
-IMPORTANT: The readonly signals do **not** have any built-in mechanism that would prevent deep-mutation of their value.
+IMPORTANT: 只读 signal **没有**任何内建机制来阻止对其值的深层修改(deep-mutation)。
 
-### Computed signals
+### 计算 signal(computed signals)
 
-**Computed signals** are read-only signals that derive their value from other signals. You define computed signals using the `computed` function and specifying a derivation:
+**计算 signal** 是从其他 signal 派生值的只读 signal。使用 `computed` 函数并指定派生逻辑来定义计算 signal:
 
 ```typescript
 const count: WritableSignal<number> = signal(0);
 const doubleCount: Signal<number> = computed(() => count() * 2);
 ```
 
-The `doubleCount` signal depends on the `count` signal. Whenever `count` updates, Angular knows that `doubleCount` needs to update as well.
+`doubleCount` signal 依赖 `count` signal。每当 `count` 更新时,Angular 都知道 `doubleCount` 也需要更新。
 
-#### Computed signals are both lazily evaluated and memoized
+#### 计算 signal 既是惰性求值的,也是记忆化的
 
-`doubleCount`'s derivation function does not run to calculate its value until the first time you read `doubleCount`. The calculated value is then cached, and if you read `doubleCount` again, it will return the cached value without recalculating.
+`doubleCount` 的派生函数直到你第一次读取 `doubleCount` 时才会执行。计算出的值会被缓存,再次读取 `doubleCount` 时会直接返回缓存值,而不会重新计算。
 
-If you then change `count`, Angular knows that `doubleCount`'s cached value is no longer valid, and the next time you read `doubleCount` its new value will be calculated.
+之后如果你修改了 `count`,Angular 知道 `doubleCount` 的缓存值已失效,下次读取 `doubleCount` 时会重新计算新值。
 
-As a result, you can safely perform computationally expensive derivations in computed signals, such as filtering arrays.
+因此,你可以放心在计算 signal 中执行开销较大的派生运算,例如过滤数组。
 
-#### Computed signals are not writable signals
+#### 计算 signal 不是可写 signal
 
-You cannot directly assign values to a computed signal. That is,
+你不能直接给计算 signal 赋值。也就是说,
 
 ```ts
 doubleCount.set(3);
 ```
 
-produces a compilation error, because `doubleCount` is not a `WritableSignal`.
+会产生编译错误,因为 `doubleCount` 不是 `WritableSignal`。
 
-#### Computed signal dependencies are dynamic
+#### 计算 signal 的依赖是动态的
 
-Only the signals actually read during the derivation are tracked. For example, in this `computed` the `count` signal is only read if the `showCount` signal is true:
+只有派生过程中真正被读取的 signal 才会被追踪。例如下面这个 `computed`,只有当 `showCount` signal 为 true 时才会读取 `count` signal:
 
 ```ts
 const showCount = signal(false);
@@ -118,29 +121,29 @@ const conditionalCount = computed(() => {
 });
 ```
 
-When you read `conditionalCount`, if `showCount` is `false` the "Nothing to see here!" message is returned _without_ reading the `count` signal. This means that if you later update `count` it will _not_ result in a recomputation of `conditionalCount`.
+当你读取 `conditionalCount` 时,如果 `showCount` 为 `false`,会返回 "Nothing to see here!" 消息而_不_读取 `count` signal。这意味着之后更新 `count` 也_不会_触发 `conditionalCount` 的重新计算。
 
-If you set `showCount` to `true` and then read `conditionalCount` again, the derivation will re-execute and take the branch where `showCount` is `true`, returning the message which shows the value of `count`. Changing `count` will then invalidate `conditionalCount`'s cached value.
+如果你把 `showCount` 设为 `true` 后再次读取 `conditionalCount`,派生函数会重新执行,走到 `showCount` 为 `true` 的分支,返回包含 `count` 值的消息。此后修改 `count` 就会使 `conditionalCount` 的缓存值失效。
 
-Note that dependencies can be removed during a derivation as well as added. If you later set `showCount` back to `false`, then `count` will no longer be considered a dependency of `conditionalCount`.
+注意,依赖在派生过程中既可能被添加,也可能被移除。如果之后你把 `showCount` 改回 `false`,`count` 将不再被视为 `conditionalCount` 的依赖。
 
-## Reactive contexts
+## 响应式上下文
 
-A **reactive context** is a runtime state where Angular monitors signal reads to establish a dependency. The code reading the signal is the _consumer_, and the signal being read is the _producer_.
+**响应式上下文(reactive context)**是一种运行时状态,Angular 在其中监控 signal 的读取以建立依赖关系。读取 signal 的代码是_消费者(consumer)_,被读取的 signal 是_生产者(producer)_。
 
-Angular automatically enters a reactive context when:
+Angular 会在以下情况自动进入响应式上下文:
 
-- Executing an `effect`, `afterRenderEffect` callback.
-- Evaluating a `computed` signal.
-- Evaluating a `linkedSignal`.
-- Evaluating a `resource`'s params or loader function.
-- Rendering a component template (including bindings in the [host property](guide/components/host-elements#binding-to-the-host-element)).
+- 执行 `effect`、`afterRenderEffect` 回调时。
+- 求值 `computed` signal 时。
+- 求值 `linkedSignal` 时。
+- 求值 `resource` 的 params 或 loader 函数时。
+- 渲染组件模板时(包括 [host 属性](guide/components/host-elements#binding-to-the-host-element)中的绑定)。
 
-During these operations, Angular creates a _live_ connection. If a tracked signal changes, Angular will _eventually_ re-run the consumer.
+在这些操作期间,Angular 会建立一个_活跃_连接。如果被追踪的 signal 发生变化,Angular _最终_会重新运行消费者。
 
-### Asserts the reactive context
+### 断言响应式上下文
 
-Angular provides the `assertNotInReactiveContext` helper function to assert that code is not executing within a reactive context. Pass a reference to the calling function so the error message points to the correct API entry point if the assertion fails. This produces a clearer, more actionable error message than a generic reactive context error.
+Angular 提供了 `assertNotInReactiveContext` 辅助函数,用于断言代码没有在响应式上下文中执行。传入对调用函数的引用,这样断言失败时错误信息会指向正确的 API 入口。这比笼统的响应式上下文错误信息更清晰、更具可操作性。
 
 ```ts
 import {assertNotInReactiveContext} from '@angular/core';
@@ -151,11 +154,11 @@ function subscribeToEvents() {
 }
 ```
 
-### Reading without tracking dependencies
+### 读取但不追踪依赖
 
-Rarely, you may want to execute code which may read signals within a reactive function such as `computed` or `effect` _without_ creating a dependency.
+少数情况下,你可能希望在 `computed`、`effect` 等响应式函数中执行的代码虽然读取了 signal,却_不_建立依赖。
 
-For example, suppose that when `currentUser` changes, the value of a `counter` should be logged. You could create an `effect` which reads both signals:
+例如,假设你想在 `currentUser` 变化时打印 `counter` 的值。你可以创建一个同时读取两个 signal 的 `effect`:
 
 ```ts
 effect(() => {
@@ -163,9 +166,9 @@ effect(() => {
 });
 ```
 
-This example will log a message when _either_ `currentUser` or `counter` changes. However, if the effect should only run when `currentUser` changes, then the read of `counter` is only incidental and changes to `counter` shouldn't log a new message.
+这个例子在 `currentUser` _或_ `counter` 任何一个变化时都会打印消息。但如果这个 effect 只应在 `currentUser` 变化时运行,那么对 `counter` 的读取只是附带的,`counter` 的变化不应触发新消息。
 
-You can prevent a signal read from being tracked by calling its getter with `untracked`:
+调用 signal 的 getter 时套上 `untracked`,即可避免这次读取被追踪:
 
 ```ts
 effect(() => {
@@ -173,7 +176,7 @@ effect(() => {
 });
 ```
 
-`untracked` is also useful when an effect needs to invoke some external code which shouldn't be treated as a dependency:
+当 effect 需要调用某些不应被视为依赖的外部代码时,`untracked` 同样有用:
 
 ```ts
 effect(() => {
@@ -186,9 +189,9 @@ effect(() => {
 });
 ```
 
-### Reactive context and async operations
+### 响应式上下文与异步操作
 
-The reactive context is only active for synchronous code. Any signal reads that occur after an asynchronous boundary will not be tracked as dependencies.
+响应式上下文只对同步代码有效。任何发生在异步边界之后的 signal 读取都不会被追踪为依赖。
 
 ```ts {avoid}
 effect(async () => {
@@ -198,7 +201,7 @@ effect(async () => {
 });
 ```
 
-To ensure all signal reads are tracked, read signals before the `await`. This includes passing them as arguments to the awaited function, since arguments are evaluated synchronously:
+为确保所有 signal 读取都被追踪,请在 `await` 之前读取 signal。包括把它们作为参数传给被 await 的函数——参数是同步求值的:
 
 ```ts {prefer}
 effect(async () => {
@@ -215,26 +218,26 @@ effect(async () => {
 });
 ```
 
-## Advanced derivations
+## 高级派生
 
-While `computed` handles simple readonly derivations, you might find yourself needing a writable state that is dependent on other signals.
-For more information see the [Dependent state with linkedSignal](/guide/signals/linked-signal) guide.
+`computed` 处理的是简单的只读派生,但有时你可能需要依赖其他 signal 的可写状态。
+更多信息参见 [使用 linkedSignal 的依赖状态](/guide/signals/linked-signal) 指南。
 
-All signal APIs are synchronous— `signal`, `computed`, `input`, etc. However, applications often need to deal with data that is available asynchronously. A `Resource` gives you a way to incorporate async data into your application's signal-based code and still allow you to access its data synchronously. For more information see the [Async reactivity with resources](/guide/signals/resource) guide.
+所有 signal API 都是同步的——`signal`、`computed`、`input` 等。然而,应用经常需要处理异步到达的数据。`Resource` 提供了一种把异步数据融入应用基于 signal 的代码、同时仍能同步访问其数据的方式。更多信息参见 [使用 resource 的异步响应式](/guide/signals/resource) 指南。
 
-## Executing side effects on non-reactive APIs
+## 在非响应式 API 上执行副作用
 
-Synchronous or asynchronous derivations are recommended when we want to react to state changes. However, this doesn't cover all the possible use cases, and you'll sometimes find yourself in a situation where you need to react to signal changes on non-reactive APIs. Use `effect` or `afterRenderEffect` for those specific use cases. For more information see [Side effects for non-reactive APIs](/guide/signals/effect) guide.
+当我们需要对状态变化做出反应时,推荐使用同步或异步派生。但这并不能覆盖所有用例,有时你需要对非响应式 API 上的 signal 变化做出反应。针对这类特定用例,请使用 `effect` 或 `afterRenderEffect`。更多信息参见[非响应式 API 的副作用](/guide/signals/effect)指南。
 
-## Reading signals in `OnPush` components
+## 在 `OnPush` 组件中读取 signal
 
-When you read a signal within an `OnPush` component's template, Angular tracks the signal as a dependency of that component. When the value of that signal changes, Angular automatically [marks](api/core/ChangeDetectorRef#markforcheck) the component to ensure it gets updated the next time change detection runs. Refer to the [Skipping component subtrees](best-practices/skipping-subtrees) guide for more information about `OnPush` components.
+当你在 `OnPush` 组件的模板中读取 signal 时,Angular 会把该 signal 追踪为该组件的依赖。当该 signal 的值变化时,Angular 会自动[标记](api/core/ChangeDetectorRef#markforcheck)该组件,确保下次变更检测运行时它会被更新。有关 `OnPush` 组件的更多信息,参阅[跳过组件子树](best-practices/skipping-subtrees)指南。
 
-## Advanced topics
+## 高级主题
 
-### Signal equality functions
+### Signal 相等性函数
 
-When creating a signal, you can optionally provide an equality function, which will be used to check whether the new value is actually different than the previous one.
+创建 signal 时,你可以选择提供一个相等性函数,用于判断新值是否与旧值真正不同。
 
 ```ts
 import isEqual from 'lodash/isEqual';
@@ -247,13 +250,13 @@ const data = signal(['test'], {equal: isEqual});
 data.set(['test']);
 ```
 
-Equality functions can be provided to both writable and computed signals.
+可写 signal 和计算 signal 都可以提供相等性函数。
 
-HELPFUL: By default, signals use referential equality ([`Object.is()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison).
+HELPFUL: 默认情况下,signal 使用引用相等性([`Object.is()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 比较)。
 
-### Type checking signals
+### Signal 类型检查
 
-You can use `isSignal` to check if a value is a `Signal`:
+你可以使用 `isSignal` 检查一个值是否是 `Signal`:
 
 ```ts
 const count = signal(0);
@@ -264,7 +267,7 @@ isSignal(doubled); // true
 isSignal(42); // false
 ```
 
-To specifically check if a signal is writable, use `isWritableSignal`:
+要专门检查某个 signal 是否可写,使用 `isWritableSignal`:
 
 ```ts
 const count = signal(0);
@@ -274,6 +277,6 @@ isWritableSignal(count); // true
 isWritableSignal(doubled); // false
 ```
 
-## Using signals with RxJS
+## 与 RxJS 一起使用 signal
 
-See [RxJS interop with Angular signals](ecosystem/rxjs-interop) for details on interoperability between signals and RxJS.
+signal 与 RxJS 的互操作详情参见 [RxJS 与 Angular signals 互操作](ecosystem/rxjs-interop)。
