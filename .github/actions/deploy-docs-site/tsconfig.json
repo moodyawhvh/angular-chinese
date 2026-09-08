@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ES2021",
+    "types": ["node"],
+    "lib": ["es2021"],
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "noImplicitOverride": true,
+    "esModuleInterop": true,
+    "noImplicitReturns": true,
+    "declaration": true,
+    "sourceMap": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["es2015"],
+    "types": ["node", "jasmine"],
+    "module": "esnext",
+    "moduleResolution": "nodenext",
+    "sourceMap": true,
+    "declaration": true
+  }
+}
