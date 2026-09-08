@@ -1,34 +1,36 @@
-<docs-decorative-header title="Installation" imgSrc="adev/src/assets/images/what_is_angular.svg"> <!-- markdownlint-disable-line -->
+> 🌐 本文档由 [angular/angular](https://github.com/angular/angular) 翻译,英文原版见原项目。
+
+<docs-decorative-header title="安装" imgSrc="adev/src/assets/images/what_is_angular.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-Get started with Angular quickly with online starters or locally with your terminal.
+通过在线启动器,或在本地终端中,快速上手 Angular。
 
-## Play Online
+## 在线体验
 
-If you just want to play around with Angular in your browser without setting up a project, you can use our online sandbox:
+如果你只想在浏览器里随便玩玩 Angular、不想搭建项目,可以使用我们的在线沙盒:
 
-<docs-card title="Playground" href="/playground" link="Open on Playground" iconImgSrc="adev/src/assets/icons/playground.svg" titleInline>
-The fastest way to play with an Angular app. No setup required.
+<docs-card title="Playground" href="/playground" link="在 Playground 中打开" iconImgSrc="adev/src/assets/icons/playground.svg" titleInline>
+体验 Angular 应用的最快方式,无需任何环境配置。
 </docs-card>
 
-## Set up a new project locally
+## 在本地搭建新项目
 
-If you're starting a new project, you'll most likely want to create a local project so that you can use tooling such as Git.
+如果你要开启一个新项目,大概率需要在本地创建项目,以便使用 Git 等工具链。
 
-### Prerequisites
+### 前置条件
 
-- **Node.js** - [v22.22.3 or newer](/reference/versions)
-- **Text editor** - We recommend [Visual Studio Code](https://code.visualstudio.com/)
-- **Terminal** - Required for running [Angular CLI](/tools/cli) commands
-- **Development Tool** - To improve your development workflow, we recommend the [Angular Language Service](/tools/language-service)
+- **Node.js** - [v22.22.3 或更新版本](/reference/versions)
+- **文本编辑器** - 推荐 [Visual Studio Code](https://code.visualstudio.com/)
+- **终端** - 运行 [Angular CLI](/tools/cli) 命令所必需
+- **开发工具** - 为了提升开发体验,推荐安装 [Angular Language Service](/tools/language-service)
 
-### Instructions
+### 操作步骤
 
-The following guide will walk you through setting up a local Angular project.
+以下指南将带你完成本地 Angular 项目的搭建。
 
-#### Install Angular CLI
+#### 安装 Angular CLI
 
-Open a terminal (if you're using [Visual Studio Code](https://code.visualstudio.com/), you can open an [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal)) and run the following command:
+打开终端(如果使用 [Visual Studio Code](https://code.visualstudio.com/),可以打开[集成终端](https://code.visualstudio.com/docs/editor/integrated-terminal)),运行以下命令:
 
 <docs-code-multifile>
   <docs-code
@@ -57,44 +59,44 @@ Open a terminal (if you're using [Visual Studio Code](https://code.visualstudio.
     </docs-code>
 </docs-code-multifile>
 
-If you are having issues running this command in Windows or Unix, check out the [CLI docs](/tools/cli/setup-local#install-the-angular-cli) for more info.
+如果在 Windows 或 Unix 上运行该命令遇到问题,请查阅 [CLI 文档](/tools/cli/setup-local#install-the-angular-cli)了解更多信息。
 
-#### Create a new project
+#### 创建新项目
 
-In your terminal, run the CLI command [`ng new`](cli/new) with the desired project name. In the following examples, we'll be using the example project name of `my-first-angular-app`.
+在终端中,使用 CLI 命令 [`ng new`](cli/new) 并指定项目名。下面的示例使用 `my-first-angular-app` 作为示例项目名。
 
 ```shell
 ng new <project-name>
 ```
 
-You will be presented with some configuration options for your project. Use the arrow and enter keys to navigate and select which options you desire.
+CLI 会展示一系列项目配置选项。使用方向键和回车键浏览并选择你想要的选项。
 
-If you don't have any preferences, just hit the enter key to take the default options and continue with the setup.
+如果没有特别偏好,直接按回车采用默认选项继续安装即可。
 
-After you select the configuration options and the CLI runs through the setup, you should see the following message:
+选择完配置选项、CLI 完成安装后,你会看到如下提示:
 
 ```text
 ✔ Packages installed successfully.
     Successfully initialized git.
 ```
 
-At this point, you're now ready to run your project locally!
+此时,你的项目已经可以在本地运行了!
 
-#### Running your new project locally
+#### 在本地运行新项目
 
-In your terminal, switch to your new Angular project.
+在终端中,切换到新建的 Angular 项目目录。
 
 ```shell
 cd my-first-angular-app
 ```
 
-All of your dependencies should be installed at this point (which you can verify by checking for the existence of a `node_modules` folder in your project), so you can start your project by running the command:
+此时所有依赖应该都已安装完毕(可以通过检查项目里是否存在 `node_modules` 目录来确认),运行以下命令即可启动项目:
 
 ```shell
 npm start
 ```
 
-If everything is successful, you should see a similar confirmation message in your terminal:
+如果一切顺利,终端中会出现类似下面的确认信息:
 
 ```text
 Watch mode enabled. Watching for file changes...
@@ -103,12 +105,12 @@ NOTE: Raw file sizes do not reflect development server per-request transformatio
   ➜  press h + enter to show help
 ```
 
-And now you can visit the path in `Local` (e.g., `http://localhost:4200`) to see your application. Happy coding! 🎉
+现在可以访问 `Local` 中显示的地址(例如 `http://localhost:4200`)查看你的应用了。祝编码愉快!🎉
 
-### Using AI for Development
+### 使用 AI 辅助开发
 
-To get started with building in your preferred AI powered IDE, [check out Angular prompt rules and best practices](/ai/develop-with-ai).
+想在你喜欢的 AI 加持 IDE 中开始构建,请[查看 Angular 提示词规则与最佳实践](/ai/develop-with-ai)。
 
-## Next steps
+## 下一步
 
-Now that you've created your Angular project, you can learn more about Angular in our [Essentials guide](/essentials) or choose a topic in our in-depth guides!
+Angular 项目已经创建完成,你可以通过 [Essentials 指南](/essentials)进一步了解 Angular,或在我们的深度指南中任选一个主题开始学习!
